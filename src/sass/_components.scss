@@ -1,0 +1,41 @@
+.app {
+  background-color: #f2f2f2;
+  width: 100%;
+}
+
+.playground {
+  // padding: 5rem ;
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5rem 2.5rem 5rem 2.5rem;
+}
+.board {
+  background-color: aqua;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  justify-items: center;
+}
+.card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+}
+.image {
+  width: 5rem;
+  height: 8rem;
+  object-fit: contain;
+  backface-visibility: hidden;
+  &--chibi {
+    position: absolute;
+    transform: rotateY(180deg);
+  }
+}
+
+.image--turn_chibi_on {
+  transform: rotateY(180deg);
+}
+.image--turn_chibi_off {
+  transform: rotateY(180deg);
+}

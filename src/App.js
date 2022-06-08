@@ -1,7 +1,64 @@
-import "./App.css";
-
+// import "./App.css";
+import "./sass/main.scss";
+import { React, useState } from "react";
+import luffy from "./photos/luffy.png";
+import luffy2 from "./photos/luffy2.png";
+import brook from "./photos/brook.png";
+import db from "./photos/db.png";
+import potato from "./photos/potato.png";
+import sakura from "./photos/sakura.png";
+import saiki from "./photos/saiki.png";
+import baldy from "./photos/baldy.png";
+import { randomizedArray } from "./utilities";
+import CardPalette from "./components/CardPalette";
 function App() {
-  return <div className="App"></div>;
+  const [prev, setPrev] = useState("");
+  const [newGame, setNewGame] = useState(false);
+  const [isSame, setIsSame] = useState(false);
+  const [cards, setCards] = useState([]);
+
+  return (
+    <div className="app">
+      <main className="playground">
+        <div className="board">
+          {cards.map((s, index) => (
+            <CardPalette
+              image={s.name}
+              id={s.id}
+              key={index}
+              prev={prev}
+              setPrev={setPrev}
+              isSame={isSame}
+              setIsSame={setIsSame}
+            />
+          ))}
+          {!newGame ? (
+            <button
+              onClick={() => {
+                setNewGame(!newGame);
+                setCards(
+                  randomizedArray([
+                    { name: luffy, id: 0 },
+                    { name: luffy2, id: 1 },
+                    { name: brook, id: 2 },
+                    { name: db, id: 3 },
+                    { name: potato, id: 4 },
+                    { name: sakura, id: 5 },
+                    { name: saiki, id: 6 },
+                    { name: baldy, id: 7 },
+                  ])
+                );
+              }}
+            >
+              New Game
+            </button>
+          ) : (
+            ""
+          )}
+        </div>
+      </main>
+    </div>
+  );
 }
 
 export default App;
