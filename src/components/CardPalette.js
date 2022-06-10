@@ -1,38 +1,46 @@
-import { React, useState } from "react";
+import { React } from "react";
 import q from "../photos/q.png";
-const CardPalette = ({ image, id, prev, setPrev, setIsSame, isSame }) => {
-  const [isChibiOn, setIsChibiOn] = useState(false);
-  // if (prev === id) {
-  //   setTimeout(() => setIsChibiOn(false), 2000);
-  // }
+import { change, orGate } from "../utilities";
+const CardPalette = ({
+  image,
+  prev,
+  setPrev,
+  isChibiOn,
+  setIsChibiOn,
+  id,
+  uniqueId,
+  setIsSame,
+  setUniqueId,
+}) => {
   const clickhandeler = () => {
-    if (isChibiOn) {
-      return;
-    }
     if (!prev) {
       setPrev(id);
-      setIsChibiOn(true);
-      return;
-    } else {
-      if (prev !== id) {
-        setIsChibiOn(true);
-        setTimeout(() => {
-          setIsChibiOn(false);
-        }, 2000);
-        setPrev("");
-        setIsSame(false);
-      }
-      if (prev === id) {
-        setIsChibiOn(true);
-        setPrev("");
-        setIsSame(true);
-      }
+      setUniqueId(uniqueId);
+      setIsChibiOn(change(uniqueId, isChibiOn, true));
+    } else if (prev === id) {
+      setIsSame(true);
+      setPrev("");
+      setIsChibiOn(change(uniqueId, isChibiOn, true));
+    } else if (prev !== id) {
+      console.log("not equal");
+      setPrev("");
+      setIsChibiOn(() => change(uniqueId, isChibiOn, true));
+      setIsSame(false);
+
+      setTimeout(() => {
+        console.log("timelut ley garda");
+        return setIsChibiOn((preev) => {
+          console.log("suru ko timeout");
+          console.log(preev);
+          return change(uniqueId, preev, false);
+        });
+      }, 2000);
     }
   };
   return (
     <div
       className={`card ${
-        isChibiOn ? "image--turn_chibi_on" : "image--turn _chibi_off"
+        isChibiOn[uniqueId] ? "image--turn_chibi_on" : "image--turn _chibi_off"
       }`}
       onClick={clickhandeler}
     >
