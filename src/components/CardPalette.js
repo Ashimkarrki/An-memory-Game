@@ -1,6 +1,6 @@
 import { React } from "react";
 import q from "../photos/q.png";
-import { change, orGate } from "../utilities";
+import { change } from "../utilities";
 const CardPalette = ({
   image,
   prev,
@@ -11,8 +11,15 @@ const CardPalette = ({
   uniqueId,
   setIsSame,
   setUniqueId,
+  setTweak,
+  tweak,
+  setPending,
+  pending,
 }) => {
   const clickhandeler = () => {
+    if (isChibiOn[uniqueId] || pending) {
+      return;
+    }
     if (!prev) {
       setPrev(id);
       setUniqueId(uniqueId);
@@ -25,13 +32,12 @@ const CardPalette = ({
       console.log("not equal");
       setPrev("");
       setIsChibiOn(() => change(uniqueId, isChibiOn, true));
+      setTweak(!tweak);
       setIsSame(false);
-
+      setPending(true);
       setTimeout(() => {
-        console.log("timelut ley garda");
-        return setIsChibiOn((preev) => {
-          console.log("suru ko timeout");
-          console.log(preev);
+        setPending(false);
+        setIsChibiOn((preev) => {
           return change(uniqueId, preev, false);
         });
       }, 2000);
