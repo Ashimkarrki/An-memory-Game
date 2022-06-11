@@ -1,5 +1,5 @@
-// import "./App.css";
-import "./sass/main.scss";
+import "./App.css";
+// import "./sass/main.scss";
 import { React, useState, useEffect } from "react";
 import luffy from "./photos/luffy.png";
 import luffy2 from "./photos/luffy2.png";
